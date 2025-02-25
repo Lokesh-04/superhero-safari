@@ -26,6 +26,20 @@ interface Hero {
   image: {
     url: string;
   };
+  appearance: {
+    gender: string;
+    race: string;
+    height: string[];
+    weight: string[];
+  };
+  work: {
+    occupation: string;
+    base: string;
+  };
+  connections: {
+    "group-affiliation": string;
+    relatives: string;
+  };
 }
 
 const Index = () => {
@@ -113,6 +127,15 @@ const Index = () => {
               biography={{
                 fullName: hero.biography["full-name"],
                 publisher: hero.biography.publisher,
+              }}
+              appearance={hero.appearance}
+              work={{
+                occupation: hero.work.occupation,
+                base: hero.work.base,
+              }}
+              connections={{
+                groupAffiliation: hero.connections["group-affiliation"],
+                relatives: hero.connections.relatives,
               }}
             />
           ) : (

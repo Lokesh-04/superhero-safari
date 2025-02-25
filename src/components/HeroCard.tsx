@@ -64,45 +64,52 @@ export const HeroCard = ({ name, image, powerstats, biography, appearance, work,
   );
 
   return (
-    <Card className="w-full max-w-2xl mx-auto overflow-hidden bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-xl animate-fade-in">
-      <div className="relative h-[400px] overflow-hidden">
+    <Card className="w-full max-w-5xl mx-auto overflow-hidden bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-xl animate-fade-in flex flex-col md:flex-row">
+      {/* Left side - Hero Image */}
+      <div className="relative w-full md:w-2/5 h-[400px] md:h-auto">
         <img
           src={image}
           alt={name}
           className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 p-6 text-white">
+        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 p-6 text-white md:hidden">
           <h2 className="text-3xl font-bold mb-2">{name}</h2>
           <p className="text-gray-300">{biography.fullName}</p>
+        </div>
+      </div>
+
+      {/* Right side - Hero Information */}
+      <div className="relative flex-1 p-6 space-y-6">
+        <div className="hidden md:block">
+          <h2 className="text-3xl font-bold mb-2 text-hero-900">{name}</h2>
+          <p className="text-gray-600">{biography.fullName}</p>
           {biography.publisher && (
-            <span className="inline-flex items-center px-3 py-1 mt-2 rounded-full text-xs font-medium bg-hero-500/30 backdrop-blur-sm text-white">
+            <span className="inline-flex items-center px-3 py-1 mt-2 rounded-full text-xs font-medium bg-hero-500 text-white">
               {biography.publisher}
             </span>
           )}
         </div>
-      </div>
-      
-      <div className="p-6 space-y-6">
+
         <div className="grid grid-cols-3 gap-4">
-          <div className="text-center">
-            <Shield className="w-8 h-8 mx-auto mb-2 text-hero-500" />
-            <div className="text-2xl font-bold text-hero-600">{powerstats.durability}</div>
-            <div className="text-sm text-gray-500">Defense</div>
+          <div className="text-center p-3 bg-gray-50 rounded-lg">
+            <Shield className="w-6 h-6 mx-auto mb-2 text-hero-500" />
+            <div className="text-xl font-bold text-hero-600">{powerstats.durability}</div>
+            <div className="text-xs text-gray-500">Defense</div>
           </div>
-          <div className="text-center">
-            <Bolt className="w-8 h-8 mx-auto mb-2 text-hero-500" />
-            <div className="text-2xl font-bold text-hero-600">{powerstats.power}</div>
-            <div className="text-sm text-gray-500">Power</div>
+          <div className="text-center p-3 bg-gray-50 rounded-lg">
+            <Bolt className="w-6 h-6 mx-auto mb-2 text-hero-500" />
+            <div className="text-xl font-bold text-hero-600">{powerstats.power}</div>
+            <div className="text-xs text-gray-500">Power</div>
           </div>
-          <div className="text-center">
-            <Star className="w-8 h-8 mx-auto mb-2 text-hero-500" />
-            <div className="text-2xl font-bold text-hero-600">{powerstats.combat}</div>
-            <div className="text-sm text-gray-500">Combat</div>
+          <div className="text-center p-3 bg-gray-50 rounded-lg">
+            <Star className="w-6 h-6 mx-auto mb-2 text-hero-500" />
+            <div className="text-xl font-bold text-hero-600">{powerstats.combat}</div>
+            <div className="text-xs text-gray-500">Combat</div>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <PowerstatBar value={powerstats.intelligence} label="Intelligence" />
           <PowerstatBar value={powerstats.strength} label="Strength" />
           <PowerstatBar value={powerstats.speed} label="Speed" />
@@ -116,7 +123,7 @@ export const HeroCard = ({ name, image, powerstats, biography, appearance, work,
           <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
         </button>
 
-        <div className={`space-y-6 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className={`space-y-4 overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
           {appearance && (
             <div className="grid grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
               <DetailSection title="Gender" content={appearance.gender} />
